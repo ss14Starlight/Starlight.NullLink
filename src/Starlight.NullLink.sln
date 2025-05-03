@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35323.107
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starlight.NullLink", "Starlight.NullLink.csproj", "{A875A427-7AA3-45A7-88C4-7834B0EE92C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A875A427-7AA3-45A7-88C4-7834B0EE92C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A875A427-7AA3-45A7-88C4-7834B0EE92C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A875A427-7AA3-45A7-88C4-7834B0EE92C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A875A427-7AA3-45A7-88C4-7834B0EE92C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {06D68B71-4679-4585-8C25-D0DFDD85D5A6}
+	EndGlobalSection
+EndGlobal
