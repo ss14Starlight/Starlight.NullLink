@@ -20,12 +20,15 @@ jobs:
 
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: src 
 
     - name: Build project
       run: dotnet build --configuration Release --no-restore
+      working-directory: src 
 
     - name: Pack NuGet package
       run: dotnet pack --configuration Release --no-build --output ./artifacts
+      working-directory: src 
 
     - name: Publish to NuGet
       if: github.event_name == 'push'
