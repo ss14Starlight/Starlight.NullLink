@@ -37,8 +37,6 @@ public record ServerInfo
     public int? Players { get; set; }
     [Id(3)]
     public ServerStatus Status { get; set; } = ServerStatus.Offline;
-    [Id(4)]
-    public bool IsAdultOnly { get; set; } = false;
 }
 [GenerateSerializer]
 public enum ServerStatus : byte
