@@ -5,10 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using Orleans;
 using Starlight.NullLink.Abstract;
+using Starlight.NullLink.Attributes;
 
 namespace Starlight.NullLink;
+
+[Alias("Starlight.NullLink.IHubGrain")]
 public interface IHubGrain : IObservableDictionaryCrudGrain<Server>, IObservableDictionaryCrudGrain<ServerInfo>, IGrainWithIntegerKey
-{ }
+{
+    [Public, Alias("GetAndSubscribe<Server>")]
+    public new ValueTask<Dictionary<string, Server>> GetAndSubscribe(IObserverDictionaryCrudGrain<Server> observer);
+    [Public, Alias("Resubscribe<Server>")]
+    public new ValueTask Resubscribe(IObserverDictionaryCrudGrain<Server> observer);
+    [Public, Alias("Unsubscribe<Server>")]
+    public new ValueTask Unsubscribe(IObserverDictionaryCrudGrain<Server> observer);
+
+    [Public, Alias("GetAndSubscribe<ServerInfo>")]
+    public new ValueTask<Dictionary<string, ServerInfo>> GetAndSubscribe(IObserverDictionaryCrudGrain<ServerInfo> observer);
+    [Public, Alias("Resubscribe<ServerInfo>")]
+    public new ValueTask Resubscribe(IObserverDictionaryCrudGrain<ServerInfo> observer);
+    [Public, Alias("Unsubscribe<ServerInfo>")]
+    public new ValueTask Unsubscribe(IObserverDictionaryCrudGrain<ServerInfo> observer);
+}
 
 [GenerateSerializer]
 [Alias("Starlight.NullLink.Server")]
@@ -19,10 +36,8 @@ public record Server
     [Id(1)]
     public string? Description { get; set; }
     [Id(2)]
-    public string? Image { get; set; }
-    [Id(3)]
     public ServerType Type { get; set; } = ServerType.NRP;
-    [Id(4)]
+    [Id(3)]
     public bool IsAdultOnly { get; set; } = false;
 }
 [GenerateSerializer]
