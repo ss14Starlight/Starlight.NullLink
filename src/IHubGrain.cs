@@ -39,6 +39,8 @@ public record Server
     public ServerType Type { get; set; } = ServerType.NRP;
     [Id(3)]
     public bool IsAdultOnly { get; set; } = false;
+    [Id(4)]
+    public required string ConnectionString { get; set; }
 }
 [GenerateSerializer]
 [Alias("Starlight.NullLink.ServerInfo")]
