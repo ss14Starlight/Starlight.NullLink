@@ -3,7 +3,7 @@ using Orleans;
 
 namespace Starlight.NullLink.Abstract;
 
-public interface IObservableListCrudGrain<T> : ICrudGrain<List<T>> where T : class
+public interface IObservableListCrudGrain<T> : ICrudGrain<List<T>>
 {
     public ValueTask<List<T>> GetAndSubscribe(IObserverListCrudGrain<T> observer);
     public ValueTask Resubscribe(IObserverListCrudGrain<T> observer);
@@ -13,7 +13,7 @@ public interface IObservableListCrudGrain<T> : ICrudGrain<List<T>> where T : cla
 }
 
 [Alias("IObserverListCrudGrain")]
-public interface IObserverListCrudGrain<T> : IGrainObserver where T : class
+public interface IObserverListCrudGrain<T> : IGrainObserver
 {
     [OneWay]
     [Alias("Add")]

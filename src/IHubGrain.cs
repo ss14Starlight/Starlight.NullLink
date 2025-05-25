@@ -10,22 +10,28 @@ using Starlight.NullLink.Attributes;
 namespace Starlight.NullLink;
 
 [Alias("Starlight.NullLink.IHubGrain")]
-public interface IHubGrain : IObservableDictionaryCrudGrain<Server>, IObservableDictionaryCrudGrain<ServerInfo>, IGrainWithIntegerKey
+public interface IHubGrain : IGrainWithIntegerKey
 {
     [Public, Alias("GetAndSubscribe<Server>")]
-    public new ValueTask<Dictionary<string, Server>> GetAndSubscribe(IObserverDictionaryCrudGrain<Server> observer);
+    public  ValueTask<Dictionary<string, Server>> GetAndSubscribe(IServerObserver observer);
     [Public, Alias("Resubscribe<Server>")]
-    public new ValueTask Resubscribe(IObserverDictionaryCrudGrain<Server> observer);
+    public  ValueTask Resubscribe(IServerObserver observer);
     [Public, Alias("Unsubscribe<Server>")]
-    public new ValueTask Unsubscribe(IObserverDictionaryCrudGrain<Server> observer);
+    public  ValueTask Unsubscribe(IServerObserver observer);
 
     [Public, Alias("GetAndSubscribe<ServerInfo>")]
-    public new ValueTask<Dictionary<string, ServerInfo>> GetAndSubscribe(IObserverDictionaryCrudGrain<ServerInfo> observer);
+    public  ValueTask<Dictionary<string, ServerInfo>> GetAndSubscribe(IServerInfoObserver observer);
     [Public, Alias("Resubscribe<ServerInfo>")]
-    public new ValueTask Resubscribe(IObserverDictionaryCrudGrain<ServerInfo> observer);
+    public  ValueTask Resubscribe(IServerInfoObserver observer);
     [Public, Alias("Unsubscribe<ServerInfo>")]
-    public new ValueTask Unsubscribe(IObserverDictionaryCrudGrain<ServerInfo> observer);
+    public  ValueTask Unsubscribe(IServerInfoObserver observer);
 }
+
+[Alias("Starlight.NullLink.IServerObserver")]
+public interface IServerObserver : IObserverDictionaryCrudGrain<Server>, IGrainObserver;
+
+[Alias("Starlight.NullLink.IServerObserver")]
+public interface IServerInfoObserver : IObserverDictionaryCrudGrain<ServerInfo>, IGrainObserver;
 
 [GenerateSerializer]
 [Alias("Starlight.NullLink.Server")]

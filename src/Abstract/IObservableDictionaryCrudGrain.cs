@@ -3,7 +3,7 @@ using Orleans;
 
 namespace Starlight.NullLink.Abstract;
 
-public interface IObservableDictionaryCrudGrain<T> where T : class
+public interface IObservableDictionaryCrudGrain<T>
 {
     public ValueTask<Dictionary<string, T>> GetAndSubscribe(IObserverDictionaryCrudGrain<T> observer);
     public ValueTask Resubscribe(IObserverDictionaryCrudGrain<T> observer);
@@ -14,7 +14,7 @@ public interface IObservableDictionaryCrudGrain<T> where T : class
 }
 
 [Alias("IObserverDictionaryCrudGrain")]
-public interface IObserverDictionaryCrudGrain<T> : IGrainObserver where T : class
+public interface IObserverDictionaryCrudGrain<T> : IGrainObserver
 {
     [OneWay]
     [Alias("Updated")]
