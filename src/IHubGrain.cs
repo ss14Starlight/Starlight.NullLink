@@ -25,6 +25,20 @@ public interface IHubGrain : IGrainWithIntegerKey
     public  ValueTask Resubscribe(IServerInfoObserver observer);
     [Public, Alias("Unsubscribe<ServerInfo>")]
     public  ValueTask Unsubscribe(IServerInfoObserver observer);
+
+    [Alias("AddServerInfo")]
+    public ValueTask AddServerInfo(string key, ServerInfo value);
+    [Alias("UpdateServerInfo")]
+    public ValueTask UpdateServerInfo(string key, ServerInfo value);
+    [Alias("RemoveServerInfo")]
+    public ValueTask RemoveServerInfo(string key);
+
+    [Alias("AddServer")]
+    public ValueTask AddServer(string key, Server value);
+    [Alias("UpdateServer")]
+    public ValueTask UpdateServer(string key, Server value);
+    [Alias("RemoveServer")]
+    public ValueTask RemoveServer(string key);
 }
 
 [Alias("Starlight.NullLink.IServerObserver")]
