@@ -30,7 +30,7 @@ public interface IHubGrain : IGrainWithIntegerKey
 [Alias("Starlight.NullLink.IServerObserver")]
 public interface IServerObserver : IObserverDictionaryCrudGrain<Server>, IGrainObserver;
 
-[Alias("Starlight.NullLink.IServerObserver")]
+[Alias("Starlight.NullLink.IServerInfoObserver")]
 public interface IServerInfoObserver : IObserverDictionaryCrudGrain<ServerInfo>, IGrainObserver;
 
 [GenerateSerializer]
