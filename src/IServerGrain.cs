@@ -11,4 +11,7 @@ public interface IServerGrain : IGrainWithStringKey
 
     [Public, Alias("UpdateServerInfo")]
     public ValueTask UpdateServerInfo(ServerInfo info);
+
+    [Public, Alias("GetRoles")]
+    public ValueTask<ulong[]> GetPlayerRoles(Guid player);
 }
