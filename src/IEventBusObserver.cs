@@ -9,5 +9,5 @@ public interface IEventBusObserver : IGrainObserver
 
     [OneWay]
     [Alias("OnEventReceived<T>")]
-    ValueTask OnEventReceived<T>(T @event);
+    ValueTask OnEventReceived<T>(T @event) where T : BaseEvent;
 }
