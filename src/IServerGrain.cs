@@ -31,6 +31,8 @@ public sealed class PlayerData
     public GhostTheme GhostTheme = new();
     [Id(1)]
     public Dictionary<string, double> Resources = [];
+    [Id(2)]
+    public ulong[] DiscordRoles { get; set; } = [];
 }
 
 [GenerateSerializer]
