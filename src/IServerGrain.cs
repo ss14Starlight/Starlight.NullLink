@@ -31,6 +31,8 @@ public sealed class PlayerData
     public GhostTheme GhostTheme = new();
     [Id(1)]
     public Dictionary<string, double> Resources = [];
+    [Id(2)]
+    public ulong[] DiscordRoles { get; set; } = [];
 }
 
 [GenerateSerializer]
@@ -41,5 +43,5 @@ public sealed record GhostTheme
     public string Id { get; set; } = "None";
 
     [Id(1)]
-    public Color GhostThemeColor = Color.White;
+    public Color Color = Color.White;
 }
