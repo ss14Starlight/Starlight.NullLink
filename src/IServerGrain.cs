@@ -41,5 +41,5 @@ public sealed record GhostTheme
     public string Id { get; set; } = "None";
 
     [Id(1)]
-    public Color GhostThemeColor = Color.White;
+    public Color Color = Color.White;
 }
