@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Starlight.NullLink.Event;
-public sealed record ResourceChangedEvent
+public sealed record ResourceChangedEvent : BaseEvent
 {
     public required Guid Player { get; init; }
     public required string Resource { get; init; }
