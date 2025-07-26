@@ -1,4 +1,5 @@
 ﻿using Orleans;
+using Starlight.NullLink.Abstract;
 using Starlight.NullLink.Attributes;
 
 namespace Starlight.NullLink;
@@ -6,13 +7,14 @@ namespace Starlight.NullLink;
 [Alias("Starlight.NullLink.IServerGrain")]
 public interface IServerGrain : IGrainWithStringKey
 {
+    // ---- Hub ----
     [Public, Alias("UpdateServer")]
     public ValueTask UpdateServer(Server server);
 
     [Public, Alias("UpdateServerInfo")]
     public ValueTask UpdateServerInfo(ServerInfo info);
 
-
+    // ---- Player ---- 
     [Public, Alias("GetPlayerData")]
     public ValueTask<PlayerData> GetPlayerData(Guid player);
 
@@ -21,6 +23,13 @@ public interface IServerGrain : IGrainWithStringKey
 
     [Public, Alias("UpdateResource")]
     public ValueTask UpdateResource(Guid player, string key, double value);
+
+    // ---- Events ----
+    [Public, Alias("ResubscribeEventBus")]
+    public ValueTask ResubscribeEventBus(IEventBusObserver observer);
+    [Public, Alias("UnsubscribeEventBus")]
+    public ValueTask UnsubscribeEventBus(IEventBusObserver observer);
+
 }
 
 [GenerateSerializer]
