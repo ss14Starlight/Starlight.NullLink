@@ -16,6 +16,14 @@ public interface IServerGrain : IGrainWithStringKey
 
     // ---- Player ---- 
 
+    [Public, Alias("PlayerConnected")]
+    public ValueTask PlayerConnected(Guid player);
+
+    [Public, Alias("PlayerDisconnected")]
+    public ValueTask PlayerDisconnected(Guid player);
+
+    //
+
     [Public, Alias("GetPlayerRoles")]
     public ValueTask<ulong[]> GetPlayerRoles(Guid player);
 

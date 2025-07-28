@@ -2,7 +2,7 @@
 
 [GenerateSerializer]
 [Alias("Starlight.NullLink.Event.RolesChangedEvent")]
-public sealed record RolesChangedEvent : BaseEvent
+public sealed record RolesChangedEvent : BaseEvent, IPlayerEvent
 {
     [Id(0)]
     public required Guid Player { get; init; }

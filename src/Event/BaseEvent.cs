@@ -4,3 +4,8 @@ public record BaseEvent
 {
 
 }
+
+public interface IPlayerEvent
+{
+    Guid Player { get; }
+}
