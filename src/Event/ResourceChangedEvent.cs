@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Starlight.NullLink.Event;
 [GenerateSerializer]
 [Alias("Starlight.NullLink.Event.ResourceChangedEvent")]
-public sealed record ResourceChangedEvent : BaseEvent
+public sealed record ResourceChangedEvent : BaseEvent, IPlayerEvent
 {
     [Id(0)]
     public required Guid Player { get; init; }
