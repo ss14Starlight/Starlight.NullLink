@@ -15,8 +15,9 @@ public interface IServerGrain : IGrainWithStringKey
     public ValueTask UpdateServerInfo(ServerInfo info);
 
     // ---- Player ---- 
-    [Public, Alias("GetPlayerData")]
-    public ValueTask<PlayerData> GetPlayerData(Guid player);
+
+    [Public, Alias("GetPlayerRoles")]
+    public ValueTask<ulong[]> GetPlayerRoles(Guid player);
 
     [Public, Alias("SetGhostTheme")]
     public ValueTask SetGhostTheme(Guid player, GhostTheme theme);
