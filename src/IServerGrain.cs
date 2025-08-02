@@ -23,6 +23,11 @@ public interface IServerGrain : IGrainWithStringKey
     public ValueTask PlayerDisconnected(Guid player);
 
     //
+
+    [Public, Alias("HasPlayerAnyRole")]
+    public ValueTask<bool> HasPlayerAnyRole(Guid player, ulong[] roles);
+
+    //
     [Public, Alias("SetGhostTheme")]
     public ValueTask SetGhostTheme(Guid player, GhostTheme theme);
 
