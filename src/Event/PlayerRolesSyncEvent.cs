@@ -8,4 +8,6 @@ public sealed record PlayerRolesSyncEvent : BaseEvent, IPlayerEvent
     public required Guid Player { get; init; }
     [Id(1)]
     public required ulong[] Roles { get; init; }
+    [Id(2)]
+    public ulong DiscordId { get; init; }
 }

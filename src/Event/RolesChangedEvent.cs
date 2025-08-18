@@ -10,4 +10,6 @@ public sealed record RolesChangedEvent : BaseEvent, IPlayerEvent
     public required ulong[] Add { get; init; }
     [Id(2)]
     public required ulong[] Remove { get; init; }
+    [Id(3)]
+    public ulong DiscordId { get; init; }
 }
