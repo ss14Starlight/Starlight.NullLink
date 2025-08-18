@@ -9,7 +9,7 @@
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>SS14.Starlight.NullLink</PackageId>
-    <Version>1.0.17</Version>      <!-- TODO: Implement proper versioning. -->
+    <Version>1.0.18</Version>      <!-- TODO: Implement proper versioning. -->
     <Authors>Darkrell</Authors>
     <Description>Inter-server actor interaction contracts for Project Starlight of Space Station 14.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
