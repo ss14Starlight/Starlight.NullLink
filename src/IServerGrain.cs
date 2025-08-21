@@ -28,7 +28,7 @@ public interface IServerGrain : IGrainWithStringKey
     public ValueTask<bool> HasPlayerAnyRole(Guid player, ulong[] roles);
 
     [Public, Alias("GetPlayerDiscordId")]
-    public ValueTask<long> GetPlayerDiscordId(Guid player);
+    public ValueTask<ulong> GetPlayerDiscordId(Guid player);
 
     //
     [Public, Alias("SetGhostTheme")]
