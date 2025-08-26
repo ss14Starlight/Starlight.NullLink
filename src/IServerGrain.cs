@@ -22,6 +22,11 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("PlayerDisconnected")]
     public ValueTask PlayerDisconnected(Guid player);
 
+    // ---- Playtime ----
+
+    [Public, Alias("UpdatePlayersPlayTime")]
+    public ValueTask UpdatePlayersPlayTime(PlayerPlayTime[] playerPlayTimes);
+
     //
 
     [Public, Alias("HasPlayerAnyRole")]
