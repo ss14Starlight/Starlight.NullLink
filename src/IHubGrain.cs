@@ -67,7 +67,7 @@ public record Server
 public record ServerInfo
 {
     [Id(0)]
-    public DateTime? СurrentStateStartedAt { get; set; }
+    public DateTime? CurrentStateStartedAt { get; set; }
     [Id(1)]
     public int? MaxPlayers { get; set; }
     [Id(2)]
