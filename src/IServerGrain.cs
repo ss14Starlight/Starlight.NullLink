@@ -4,6 +4,9 @@ using Starlight.NullLink.Attributes;
 
 namespace Starlight.NullLink;
 
+/// <summary>
+/// Server gateway
+/// </summary>
 [Alias("Starlight.NullLink.IServerGrain")]
 public interface IServerGrain : IGrainWithStringKey
 {
@@ -27,7 +30,7 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("UpdatePlayersPlayTime")]
     public ValueTask UpdatePlayersPlayTime(PlayerPlayTime[] playerPlayTimes);
 
-    //
+    // 
 
     [Public, Alias("HasPlayerAnyRole")]
     public ValueTask<bool> HasPlayerAnyRole(Guid player, ulong[] roles);
@@ -35,6 +38,8 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("GetPlayerDiscordId")]
     public ValueTask<ulong> GetPlayerDiscordId(Guid player);
 
+    [Public, Alias("BugReport")]
+    public ValueTask BugReport(string player, string title, string description);
     //
     [Public, Alias("SetGhostTheme")]
     public ValueTask SetGhostTheme(Guid player, GhostTheme theme);
