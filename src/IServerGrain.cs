@@ -39,7 +39,7 @@ public interface IServerGrain : IGrainWithStringKey
     public ValueTask<ulong> GetPlayerDiscordId(Guid player);
 
     [Public, Alias("BugReport")]
-    public ValueTask BugReport(string player, string title, string description);
+    public ValueTask BugReport(string player, string title, string description, Dictionary<string, string> metadata);
     //
     [Public, Alias("SetGhostTheme")]
     public ValueTask SetGhostTheme(Guid player, GhostTheme theme);
