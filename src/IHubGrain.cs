@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Orleans;
+using Orleans.Concurrency;
 using Starlight.NullLink.Abstract;
 using Starlight.NullLink.Attributes;
 
@@ -13,32 +14,42 @@ namespace Starlight.NullLink;
 public interface IHubGrain : IGrainWithIntegerKey
 {
     [Public, Alias("GetAndSubscribe<Server>")]
-    public  ValueTask<Dictionary<string, Server>> GetAndSubscribe(IServerObserver observer);
+    public ValueTask<Dictionary<string, Server>> GetAndSubscribe(IServerObserver observer);
     [Public, Alias("Resubscribe<Server>")]
-    public  ValueTask Resubscribe(IServerObserver observer);
+    public ValueTask Resubscribe(IServerObserver observer);
     [Public, Alias("Unsubscribe<Server>")]
-    public  ValueTask Unsubscribe(IServerObserver observer);
+    public ValueTask Unsubscribe(IServerObserver observer);
 
     [Public, Alias("GetAndSubscribe<ServerInfo>")]
-    public  ValueTask<Dictionary<string, ServerInfo>> GetAndSubscribe(IServerInfoObserver observer);
+    public ValueTask<Dictionary<string, ServerInfo>> GetAndSubscribe(IServerInfoObserver observer);
     [Public, Alias("Resubscribe<ServerInfo>")]
-    public  ValueTask Resubscribe(IServerInfoObserver observer);
+    public ValueTask Resubscribe(IServerInfoObserver observer);
     [Public, Alias("Unsubscribe<ServerInfo>")]
-    public  ValueTask Unsubscribe(IServerInfoObserver observer);
+    public ValueTask Unsubscribe(IServerInfoObserver observer);
 
     [Alias("AddServerInfo")]
     public ValueTask AddServerInfo(string key, ServerInfo value);
+
     [Alias("UpdateServerInfo")]
     public ValueTask UpdateServerInfo(string key, ServerInfo value);
+
     [Alias("RemoveServerInfo")]
     public ValueTask RemoveServerInfo(string key);
 
+
     [Alias("AddServer")]
     public ValueTask AddServer(string key, Server value);
+
     [Alias("UpdateServer")]
     public ValueTask UpdateServer(string key, Server value);
+
     [Alias("RemoveServer")]
     public ValueTask RemoveServer(string key);
+
+    [ReadOnly]
+    [Alias("GetServers")]
+    public ValueTask<string[]> GetServers();
+
 }
 
 [Alias("Starlight.NullLink.IServerObserver")]
@@ -85,7 +96,7 @@ public enum ServerStatus : byte
 }
 [GenerateSerializer]
 public enum ServerType : byte
-{                                                           
+{
     NRP,
     LRP_minus,
     LRP,
