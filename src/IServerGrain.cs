@@ -40,9 +40,6 @@ public interface IServerGrain : IGrainWithStringKey
 
     [Public, Alias("BugReport")]
     public ValueTask BugReport(string player, string title, string description, Dictionary<string, string> metadata);
-    //
-    [Public, Alias("SetGhostTheme")]
-    public ValueTask SetGhostTheme(Guid player, GhostTheme theme);
 
     [Public, Alias("UpdateResource")]
     public ValueTask UpdateResource(Guid player, string key, double value);
@@ -59,21 +56,8 @@ public interface IServerGrain : IGrainWithStringKey
 [Alias("Starlight.NullLink.PlayerData")]
 public sealed class PlayerData
 {
-    [Id(0)]
-    public GhostTheme GhostTheme = new();
     [Id(1)]
     public Dictionary<string, double> Resources = [];
     [Id(2)]
     public ulong[] DiscordRoles { get; set; } = [];
-}
-
-[GenerateSerializer]
-[Alias("Starlight.NullLink.GhostTheme")]
-public sealed record GhostTheme
-{
-    [Id(0)]
-    public string Id { get; set; } = "None";
-
-    [Id(1)]
-    public Color Color = Color.White;
 }
