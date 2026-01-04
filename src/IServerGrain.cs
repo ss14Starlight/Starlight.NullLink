@@ -42,6 +42,7 @@ public interface IServerGrain : IGrainWithStringKey
     public ValueTask BugReport(string player, string title, string description, Dictionary<string, string> metadata);
 
     [Public, Alias("UpdateResource")]
+    [Obsolete("Use IncrementResource instead.")]
     public ValueTask UpdateResource(Guid player, string key, double value);
 
     [Public, Alias("IncrementResource")]
