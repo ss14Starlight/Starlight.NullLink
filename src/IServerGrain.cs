@@ -44,6 +44,9 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("UpdateResource")]
     public ValueTask UpdateResource(Guid player, string key, double value);
 
+    [Public, Alias("IncrementResource")]
+    public ValueTask IncrementResource(Guid player, string key, double value);
+
     // ---- Events ----
     [Public, Alias("ResubscribeEventBus")]
     public ValueTask ResubscribeEventBus(IEventBusObserver observer);
