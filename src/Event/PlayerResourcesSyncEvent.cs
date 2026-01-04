@@ -1,7 +1,7 @@
 namespace Starlight.NullLink.Event;
 
 [GenerateSerializer]
-[Alias("Starlight.NullLink.Event.PlayerServerPlayTimesSyncEvent")]
+[Alias("Starlight.NullLink.Event.PlayerResourcesSyncEvent")]
 public sealed record PlayerResourcesSyncEvent : BaseEvent, IPlayerEvent
 {
     [Id(0)]
