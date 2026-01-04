@@ -41,12 +41,11 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("BugReport")]
     public ValueTask BugReport(string player, string title, string description, Dictionary<string, string> metadata);
 
+    /// <summary>
+    /// Changes Resource with ID by adding Value. So you can increase or decrease resource value.
+    /// </summary>
     [Public, Alias("UpdateResource")]
-    [Obsolete("Use IncrementResource instead.")]
     public ValueTask UpdateResource(Guid player, string key, double value);
-
-    [Public, Alias("IncrementResource")]
-    public ValueTask IncrementResource(Guid player, string key, double value);
 
     // ---- Events ----
     [Public, Alias("ResubscribeEventBus")]
