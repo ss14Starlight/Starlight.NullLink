@@ -51,8 +51,8 @@ public interface IHubGrain : IGrainWithIntegerKey
     public ValueTask<string[]> GetServers();
 
     [ReadOnly]
-    [Alias("GetServerInfo")]
-    public ValueTask<Server> GetServerInfo(string key);
+    [Alias("GetServer")]
+    public ValueTask<Server> GetServer(string key);
 
     [ReadOnly]
     [Alias("GetServerInfo")]
