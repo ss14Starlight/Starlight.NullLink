@@ -50,6 +50,14 @@ public interface IHubGrain : IGrainWithIntegerKey
     [Alias("GetServers")]
     public ValueTask<string[]> GetServers();
 
+    [ReadOnly]
+    [Alias("GetServerInfo")]
+    public ValueTask<Server> GetServerInfo(string key);
+
+    [ReadOnly]
+    [Alias("GetServerInfo")]
+    public ValueTask<ServerInfo> GetServerInfo(string key);
+
 }
 
 [Alias("Starlight.NullLink.IServerObserver")]
