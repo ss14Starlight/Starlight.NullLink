@@ -85,6 +85,13 @@ public record ServerInfo
     public int? Players { get; set; }
     [Id(3)]
     public ServerStatus Status { get; set; } = ServerStatus.Offline;
+    [Id(4)]
+    public string? MapName { get; set; }
+    [Id(5)]
+    public string? GamemodeName { get; set; }
+    [Id(6)]
+    public DateTime? RoundStartedAt { get; set; }
+
 }
 [GenerateSerializer]
 public enum ServerStatus : byte
