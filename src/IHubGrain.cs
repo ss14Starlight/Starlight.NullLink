@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Orleans;
@@ -91,6 +92,8 @@ public record ServerInfo
     public string? GamemodeName { get; set; }
     [Id(6)]
     public DateTime? RoundStartedAt { get; set; }
+    [Id(7)]
+    public bool? PanicBunkerActive { get; set; }
 
 }
 [GenerateSerializer]
