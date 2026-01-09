@@ -91,8 +91,6 @@ public record ServerInfo
     [Id(5)]
     public string? GamemodeName { get; set; }
     [Id(6)]
-    public DateTime? RoundStartedAt { get; set; }
-    [Id(7)]
     public bool? PanicBunkerActive { get; set; }
 
 }
