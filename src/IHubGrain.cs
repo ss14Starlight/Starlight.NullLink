@@ -92,6 +92,14 @@ public record ServerInfo
     public string? GamemodeName { get; set; }
     [Id(6)]
     public bool? PanicBunkerActive { get; set; }
+    // Not includes deadmined players
+    [Id(7)]
+    public int AdminCount { get; set; } = 0;
+    // Includes deadmined players 
+    [Id(8)]
+    public int MaxAdminCount { get; set; } = 0;
+    [Id(9)]
+    public int MentorCount { get; set; } = 0;
 
 }
 [GenerateSerializer]
