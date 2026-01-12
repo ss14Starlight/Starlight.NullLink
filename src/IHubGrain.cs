@@ -73,6 +73,8 @@ public record Server
     public bool IsAdultOnly { get; set; } = false;
     [Id(4)]
     public required string ConnectionString { get; set; }
+    [Id(5)]
+    public string? DisplayName { get; set; } // unlike Title, uses name from ss14 launcher.
 }
 [GenerateSerializer]
 [Alias("Starlight.NullLink.ServerInfo")]
