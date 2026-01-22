@@ -47,6 +47,9 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("UpdateResource")]
     public ValueTask UpdateResource(Guid player, string key, double value);
 
+    [Public, Alias("UpdateNotes")]
+    public ValueTask UpdateNotes(Guid player, List<AdminNote> notes);
+
     // ---- Events ----
     [Public, Alias("ResubscribeEventBus")]
     public ValueTask ResubscribeEventBus(IEventBusObserver observer);
@@ -63,4 +66,6 @@ public sealed class PlayerData
     public Dictionary<string, double> Resources = [];
     [Id(2)]
     public ulong[] DiscordRoles { get; set; } = [];
+    [Id(3)]
+    public List<AdminNote> Notes { get ; set; } = [];
 }
