@@ -66,6 +66,4 @@ public sealed class PlayerData
     public Dictionary<string, double> Resources = [];
     [Id(2)]
     public ulong[] DiscordRoles { get; set; } = [];
-    [Id(3)]
-    public List<AdminNote> Notes { get ; set; } = [];
 }
