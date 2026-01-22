@@ -1,9 +1,30 @@
 import sys
 import re
+import subprocess
 
-PROJECT_FILE = "../Starlight.NullLink.csproj"
+def get_latest_git_tag():
+    try:
+        tag = subprocess.check_output(
+            ["git", "describe", "--tags", "--abbrev=0"],
+            stderr=subprocess.DEVNULL,
+            text=True
+        ).strip()
+        return tag.lstrip("v")
+    except subprocess.CalledProcessError:
+        print("Failed to get git tag")
+        return None
 
-VERSION_REGEX = re.compile(r"<Version>(.*?)</Version>")
+def create_git_tag(tagName):
+    try:
+        subprocess.run(
+            ["git", "tag", "-a", tagName, "-m", "auto publish latest versioning"],
+            stderr=subprocess.DEVNULL,
+            text=True
+        )
+        print(f"Writed new tag with name: {tagName}")
+    except subprocess.CalledProcessError:
+        print("Failed to create git tag")
+        return None
 
 def bump_patch(version):
     major, minor, patch = [int(x) for x in version.split(".")]
@@ -24,34 +45,21 @@ def main():
         print("Usage: bump_version.py <nuget_version>")
         return 1
 
+    git_version = get_latest_git_tag()
+    if not git_version:
+        git_version = sys.argv[1]
+
     nuget_version = sys.argv[1]
 
-    with open(PROJECT_FILE, "r", encoding="utf-8") as f:
-        content = f.read()
-
-    match = VERSION_REGEX.search(content)
-    if not match:
-        print("Version tag not found in csproj")
-        return 1
-
-    local_version = match.group(1)
-
-    if local_version != nuget_version:
-        print(f"Versions differ. Local: {local_version}, NuGet: {nuget_version}")
+    if git_version != nuget_version:
+        print(f"Versions differ. Local: {git_version}, NuGet: {nuget_version}")
         return 0
 
-    new_version = bump_patch(local_version)
+    new_version = bump_patch(git_version)
 
-    new_content = VERSION_REGEX.sub(
-        f"<Version>{new_version}</Version>",
-        content,
-        count=1
-    )
+    create_git_tag("v" + new_version)
 
-    with open(PROJECT_FILE, "w", encoding="utf-8") as f:
-        f.write(new_content)
-
-    print(f"Version bumped: {local_version} -> {new_version}")
+    print(f"Version bumped: {git_version} -> {new_version}")
     return 0
 
 if __name__ == "__main__":
