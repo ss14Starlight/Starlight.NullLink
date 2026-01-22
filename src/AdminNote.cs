@@ -5,6 +5,7 @@ public sealed record AdminNote(
     int Id,
     Guid Player,
     int? Round,
+    string? ProjectName,
     string? ServerName,
     TimeSpan PlaytimeAtNote,
     string NoteType,
