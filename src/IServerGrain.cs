@@ -76,7 +76,7 @@ public sealed class PlayerData
     public HashSet<Achievement> UnlockedAchievements { get; set; } = [];
 }
 
-[GeneratedSerializer]
+[GenerateSerializer]
 [Alias("Starlight.NullLink.Achievement")]
 public sealed class Achievement
 {
