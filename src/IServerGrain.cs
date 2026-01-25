@@ -55,13 +55,13 @@ public interface IServerGrain : IGrainWithStringKey
     
     // ---- Achievments ----
     [Public, Alias("GetAllUnlockedAchievements")]
-    public ValueTask<string[]> GetUnlockedAchievements(Guid player);
+    public ValueTask<HashSet<Achievement>> GetUnlockedAchievements(Guid player);
     [Public, Alias("HasAchievementUnlocked")]
-    public ValueTask<bool> HasAchievementUnlocked(Guid player, string achievement);
+    public ValueTask<bool> HasAchievementUnlocked(Guid player, string achievementId);
     [Public, Alias("UnlockAchievement")]
-    public ValueTask UnlockAchievement(Guid player, string achievement);
+    public ValueTask UnlockAchievement(Guid player, string achievementId, string characterName);
     [Public, Alias("LockAchievement")]
-    public ValueTask LockAchievement(Guid player, string achievement);
+    public ValueTask LockAchievement(Guid player, string achievementId);
 }
 
 [GenerateSerializer]
@@ -73,5 +73,19 @@ public sealed class PlayerData
     [Id(2)]
     public ulong[] DiscordRoles { get; set; } = [];
     [Id(3)]
-    public string[] UnlockedAchievements { get; set; } = [];
+    public HashSet<Achievement> UnlockedAchievements { get; set; } = [];
+}
+
+[GeneratedSerializer]
+[Alias("Starlight.NullLink.Achievement")]
+public sealed class Achievement
+{
+    [Id(1)]
+    public required string AchievementId { get; set; } = "";
+    [Id(2)]
+    public required string GrantingServer { get; set; };
+    [Id(3)]
+    public string UnlockingCharacter { get; set; } = "";
+    [Id(4)]
+    public DateTime UnlockTime { get; set; }
 }
