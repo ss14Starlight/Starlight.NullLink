@@ -52,7 +52,14 @@ public interface IServerGrain : IGrainWithStringKey
     public ValueTask ResubscribeEventBus(IEventBusObserver observer);
     [Public, Alias("UnsubscribeEventBus")]
     public ValueTask UnsubscribeEventBus(IEventBusObserver observer);
-
+    
+    // ---- Achievments ----
+    [Public, Alias("GetAllUnlockedAchievements")]
+    public ValueTask<string[]> GetUnlockedAchievements(Guid player);
+    [Public, Alias("HasAchievementUnlocked")]
+    public ValueTask<bool> HasAchievementUnlocked(Guid player, string achievement);
+    [Public, Alias("UnlockAchievement")]
+    public ValueTask UnlockAchievement(Guid player, string achievement);
 }
 
 [GenerateSerializer]
@@ -63,4 +70,6 @@ public sealed class PlayerData
     public Dictionary<string, double> Resources = [];
     [Id(2)]
     public ulong[] DiscordRoles { get; set; } = [];
+    [Id(3)]
+    public string[] UnlockedAchievements { get; set; } = [];
 }
