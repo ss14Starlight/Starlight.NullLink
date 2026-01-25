@@ -83,7 +83,7 @@ public sealed class Achievement
     [Id(1)]
     public required string AchievementId { get; set; } = "";
     [Id(2)]
-    public required string GrantingServer { get; set; };
+    public required string GrantingServer { get; set; }
     [Id(3)]
     public string UnlockingCharacter { get; set; } = "";
     [Id(4)]
