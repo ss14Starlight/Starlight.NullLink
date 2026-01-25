@@ -60,6 +60,8 @@ public interface IServerGrain : IGrainWithStringKey
     public ValueTask<bool> HasAchievementUnlocked(Guid player, string achievement);
     [Public, Alias("UnlockAchievement")]
     public ValueTask UnlockAchievement(Guid player, string achievement);
+    [Public, Alias("LockAchievement")]
+    public ValueTask LockAchievement(Guid player, string achievement);
 }
 
 [GenerateSerializer]
