@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -9,7 +9,7 @@
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>SS14.Starlight.NullLink</PackageId>
-    <Version>1.0.31</Version>      <!-- TODO: Implement proper versioning. -->
+    <Version>1.0.32</Version>      <!-- TODO: Implement proper versioning. -->
     <Authors>Darkrell</Authors>
     <Description>Inter-server actor interaction contracts for Project Starlight of Space Station 14.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
