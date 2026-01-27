@@ -38,14 +38,29 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("GetPlayerDiscordId")]
     public ValueTask<ulong> GetPlayerDiscordId(Guid player);
 
+    // ---- Bug Reports ----
+
     [Public, Alias("BugReport")]
     public ValueTask BugReport(string player, string title, string description, Dictionary<string, string> metadata);
+
+    // ---- Resources ----
 
     /// <summary>
     /// Changes Resource with ID by adding Value. So you can increase or decrease resource value.
     /// </summary>
     [Public, Alias("UpdateResource")]
     public ValueTask UpdateResource(Guid player, string key, double value);
+
+    // ---- Notes ----
+
+    [Public, Alias("RequestNotes")]
+    public ValueTask<List<AdminNote>?> RequestNotes(Guid player);
+
+    [Public, Alias("AddNoteOrUpdate")]
+    public ValueTask AddOrUpdateNote(Guid player, AdminNote note);
+
+    [Public, Alias("RemoveNote")]
+    public ValueTask RemoveNote(Guid player, string id);
 
     // ---- Events ----
     [Public, Alias("ResubscribeEventBus")]
