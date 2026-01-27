@@ -41,5 +41,5 @@ public record struct AdminNote
     [Id(17)]
     string? UnbannedByName { get; set; }
     [Id(18)]
-    bool? Seen
+    bool? Seen { get; set; }
 }
