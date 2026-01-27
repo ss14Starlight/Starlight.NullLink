@@ -56,11 +56,8 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("RequestNotes")]
     public ValueTask<List<AdminNote>?> RequestNotes(Guid player);
 
-    [Public, Alias("AddNote")]
-    public ValueTask AddNote(Guid player, AdminNote note);
-
-    [Public, Alias("UpdateNote")]
-    public ValueTask UpdateNote(Guid player, AdminNote note);
+    [Public, Alias("AddNoteOrUpdate")]
+    public ValueTask AddOrUpdateNote(Guid player, AdminNote note);
 
     [Public, Alias("RemoveNote")]
     public ValueTask RemoveNote(Guid player, string id);
