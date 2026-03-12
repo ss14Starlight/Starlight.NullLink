@@ -30,13 +30,6 @@ def bump_patch(version):
     major, minor, patch = [int(x) for x in version.split(".")]
 
     patch += 1
-    if patch >= 50:
-        patch = 0
-        minor += 1
-
-    if minor >= 10:
-        minor = 0
-        major += 1
 
     return f"{major}.{minor}.{patch}"
 
