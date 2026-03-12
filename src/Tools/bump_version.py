@@ -41,19 +41,9 @@ def bump_patch(version):
     return f"{major}.{minor}.{patch}"
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: bump_version.py <nuget_version>")
-        return 1
-
     git_version = get_latest_git_tag()
     if not git_version:
         git_version = sys.argv[1]
-
-    nuget_version = sys.argv[1]
-
-    if git_version != nuget_version:
-        print(f"Versions differ. Local: {git_version}, NuGet: {nuget_version}")
-        return 0
 
     new_version = bump_patch(git_version)
 
