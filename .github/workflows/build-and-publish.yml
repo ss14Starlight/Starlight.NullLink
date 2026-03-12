@@ -30,15 +30,8 @@ jobs:
       run: dotnet build --configuration Release --no-restore
       working-directory: src 
 
-    - name: Get Latest Version
-      run: |
-        VERSION=$(dotnet package search SS14.Starlight.NullLink --format json \
-          | jq -r '.searchResult[] | select(.sourceName=="nuget.org") | .packages[0].latestVersion')
-
-        echo "current version:" $VERSION
-
     - name: Bump version if needed
-      run: python ./Tools/bump_version.py $VERSION
+      run: python ./Tools/bump_version.py
 
     - name: Push version bump
       run: |
