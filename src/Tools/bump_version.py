@@ -36,7 +36,7 @@ def bump_patch(version):
 def main():
     git_version = get_latest_git_tag()
     if not git_version:
-        git_version = sys.argv[1]
+        git_version = "1.2.3"
 
     new_version = bump_patch(git_version)
 
