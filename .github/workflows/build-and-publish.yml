@@ -5,6 +5,11 @@ concurrency:
   group: publish
   cancel-in-progress: true
 
+permissions:
+  contents: write
+  pull-requests: read
+  actions: read
+
 on:
   workflow_dispatch:
 
