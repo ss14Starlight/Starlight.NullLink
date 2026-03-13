@@ -4,8 +4,9 @@ namespace Starlight.NullLink;
 [Alias("AdminNote")]
 public record struct AdminNote
 {
+    // Original is id, but we adding project name(key) at the start of id like this: STARLIGHT-123 to separate them between projects. It's not an ChatGPT comment 100%.
     [Id(0)]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     [Id(1)]
     public Guid Player { get; set; }
     [Id(2)]
