@@ -35,7 +35,7 @@ jobs:
       working-directory: src 
 
     - name: Bump version if needed
-      run: python Tools/bump_version.py
+      run: python src/Tools/bump_version.py
 
     - name: Push version bump
       run: |
