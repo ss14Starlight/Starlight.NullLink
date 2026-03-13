@@ -21,7 +21,7 @@ def get_latest_git_tag():
 def create_git_tag(tagName):
     try:
         subprocess.run(
-            ["git", "tag", "-a", tagName, "-m", "auto publish latest versioning"],
+            ["git", "tag", "-a", tagName, "-m", '"auto publish latest versioning"'],
             check=True
         )
         print(f"Writed new tag with name: {tagName}")
