@@ -54,7 +54,7 @@ public interface IServerGrain : IGrainWithStringKey
     // ---- Notes ----
 
     [Public, Alias("RequestNotes")]
-    public ValueTask<HashSet<AdminNote>?> RequestNotes(Guid player);
+    public ValueTask<HashSet<AdminNote>> RequestNotes(Guid player);
 
     [Public, Alias("AddNoteOrUpdate")]
     public ValueTask AddOrUpdateNote(Guid player, AdminNote note);
