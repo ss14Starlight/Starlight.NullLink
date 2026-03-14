@@ -10,7 +10,6 @@ def get_latest_git_tag():
     try:
         tag = subprocess.check_output(
             ["git", "describe", "--tags", "--abbrev=0"],
-            check=True,
             stderr=subprocess.PIPE,
             text=True
         ).strip()
