@@ -21,12 +21,14 @@ def get_latest_git_tag():
 def create_git_tag(tagName):
     try:
         subprocess.run(
-            ["git", "tag", "-a", tagName, "-m", '"auto publish latest versioning"'],
+            ["git", "tag", "-a", tagName, "-m", "auto publish latest versioning"],
             check=True
         )
         print(f"Writed new tag with name: {tagName}")
-    except subprocess.CalledProcessError:
+    except subprocess.CalledProcessError as e:
         print("Failed to create git tag")
+        print("stderr:", e.stderr)
+        print("stdout:", e.stdout)
         return None
 
 def bump_patch(version):
