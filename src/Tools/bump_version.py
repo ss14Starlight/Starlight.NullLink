@@ -25,10 +25,14 @@ def create_git_tag(tagName):
             check=True
         )
         print(f"Writed new tag with name: {tagName}")
+        print("stdout:", result.stdout)
+        print("stderr:", result.stderr)
+
     except subprocess.CalledProcessError as e:
         print("Failed to create git tag")
-        print("stderr:", e.stderr)
+        print("return code:", e.returncode)
         print("stdout:", e.stdout)
+        print("stderr:", e.stderr)
         return None
 
 def bump_patch(version):
