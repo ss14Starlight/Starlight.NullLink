@@ -15,7 +15,7 @@ def get_latest_git_tag():
         ).strip()
         print("stdout:", result.stderr)
         return tag.lstrip("v")
-    except subprocess.CalledProcessError:
+    except subprocess.CalledProcessError as e:
         print("Failed to get git tag")
         print("return code:", e.returncode)
         print("stdout:", e.stdout)
