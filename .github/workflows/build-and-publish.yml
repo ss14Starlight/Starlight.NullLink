@@ -39,13 +39,16 @@ jobs:
       run: dotnet build --configuration Release --no-restore
       working-directory: src 
 
+    - name: Set up git
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
     - name: Bump version if needed
       run: python src/Tools/bump_version.py
 
     - name: Push version bump
       run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
         git push --tags
 
     - name: Pack NuGet package
