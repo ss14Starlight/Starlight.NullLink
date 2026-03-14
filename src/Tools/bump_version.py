@@ -13,7 +13,6 @@ def get_latest_git_tag():
             stderr=subprocess.PIPE,
             text=True
         ).strip()
-        print("stdout:", result.stderr)
         return tag.lstrip("v")
     except subprocess.CalledProcessError as e:
         print("Failed to get git tag")
