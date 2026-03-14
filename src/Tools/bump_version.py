@@ -11,11 +11,10 @@ def get_latest_git_tag():
         tag = subprocess.check_output(
             ["git", "describe", "--tags", "--abbrev=0"],
             check=True,
-            stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True
         ).strip()
-        print("stdout:", result.stdout)
+        print("stdout:", result.stderr)
         return tag.lstrip("v")
     except subprocess.CalledProcessError:
         print("Failed to get git tag")
