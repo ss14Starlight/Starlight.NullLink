@@ -17,7 +17,7 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("UpdateServerInfo")]
     public ValueTask UpdateServerInfo(ServerInfo info);
 
-    // ---- Player ---- 
+    // ---- Player ----
 
     [Public, Alias("PlayerConnected")]
     public ValueTask PlayerConnected(Guid player);
@@ -30,7 +30,7 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("UpdatePlayersPlayTime")]
     public ValueTask UpdatePlayersPlayTime(PlayerPlayTime[] playerPlayTimes);
 
-    // 
+    //
 
     [Public, Alias("HasPlayerAnyRole")]
     public ValueTask<bool> HasPlayerAnyRole(Guid player, ulong[] roles);
@@ -54,20 +54,20 @@ public interface IServerGrain : IGrainWithStringKey
     // ---- Notes ----
 
     [Public, Alias("RequestNotes")]
-    public ValueTask<List<AdminNote>?> RequestNotes(Guid player);
+    public ValueTask<HashSet<AdminNote>> RequestNotes(Guid player);
 
     [Public, Alias("AddNoteOrUpdate")]
     public ValueTask AddOrUpdateNote(Guid player, AdminNote note);
 
     [Public, Alias("RemoveNote")]
-    public ValueTask RemoveNote(Guid player, string id);
+    public ValueTask RemoveNote(Guid player, int id, string project);
 
     // ---- Events ----
     [Public, Alias("ResubscribeEventBus")]
     public ValueTask ResubscribeEventBus(IEventBusObserver observer);
     [Public, Alias("UnsubscribeEventBus")]
     public ValueTask UnsubscribeEventBus(IEventBusObserver observer);
-    
+
     // ---- Achievments ----
     [Public, Alias("GetAllUnlockedAchievements")]
     public ValueTask<HashSet<Achievement>> GetUnlockedAchievements(Guid player);
