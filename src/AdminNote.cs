@@ -6,7 +6,7 @@ public record struct AdminNote
 {
     // Original is id, but we adding project name(key) at the start of id like this: STARLIGHT-123 to separate them between projects. It's not an ChatGPT comment 100%.
     [Id(0)]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     [Id(1)]
     public Guid Player { get; set; }
     [Id(2)]
@@ -43,4 +43,6 @@ public record struct AdminNote
     public string? UnbannedByName { get; set; }
     [Id(18)]
     public bool? Seen { get; set; }
+    [Id(19)]
+    public string ProjectName { get; set; }
 }
