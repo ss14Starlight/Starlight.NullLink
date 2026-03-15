@@ -10,7 +10,7 @@ public record struct AdminNote
     [Id(1)]
     public Guid Player { get; set; }
     [Id(2)]
-    public string ProjectName { get; set; }
+    public string? ProjectName { get; set; }
     [Id(3)]
     public string ServerName { get; set; }
     [Id(4)]
