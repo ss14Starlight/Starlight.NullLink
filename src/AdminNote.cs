@@ -43,6 +43,4 @@ public record struct AdminNote
     public string? UnbannedByName { get; set; }
     [Id(18)]
     public bool? Seen { get; set; }
-    [Id(19)]
-    public string ProjectName { get; set; }
 }
