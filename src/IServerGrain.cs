@@ -60,7 +60,7 @@ public interface IServerGrain : IGrainWithStringKey
     public ValueTask AddOrUpdateNote(Guid player, AdminNote note);
 
     [Public, Alias("RemoveNote")]
-    public ValueTask RemoveNote(Guid player, int id, string project);
+    public ValueTask RemoveNote(Guid player, int id, string? project = null);
 
     // ---- Events ----
     [Public, Alias("ResubscribeEventBus")]
