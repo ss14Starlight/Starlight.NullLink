@@ -57,10 +57,10 @@ public interface IServerGrain : IGrainWithStringKey
     public ValueTask<HashSet<AdminNote>> RequestNotes(Guid player);
 
     [Public, Alias("AddNoteOrUpdate")]
-    public ValueTask AddOrUpdateNote(Guid player, AdminNote note, string? project = null);
+    public ValueTask AddOrUpdateNote(AdminNote note, string? project = null, Guid? player = null, Guid? updatedBy = null);
 
     [Public, Alias("RemoveNote")]
-    public ValueTask RemoveNote(Guid player, int id, string? project = null);
+    public ValueTask RemoveNote(Guid player, int id, string? project = null, Guid? removedBy = null);
 
     // ---- Events ----
     [Public, Alias("ResubscribeEventBus")]
