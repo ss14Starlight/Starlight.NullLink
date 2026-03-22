@@ -43,4 +43,8 @@ public record struct AdminNote
     public string? UnbannedByName { get; set; }
     [Id(18)]
     public bool? Seen { get; set; }
+    [Id(19)]
+    public Guid? EditedBy { get; set; }
+    [Id(20)]
+    public Guid? RemovedBy { get; set; }
 }

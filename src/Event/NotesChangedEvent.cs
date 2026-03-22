@@ -11,7 +11,7 @@ public sealed record NotesChangedEvent : BaseEvent, IPlayerEvent
     [Id(1)]
     public required AdminNote? Add { get; init; }
     [Id(2)]
-    public required (Guid, AdminNote?) Update { get; init; }
+    public required AdminNote? Update { get; init; }
     [Id(3)]
-    public required (Guid, AdminNote?) Remove { get; init; }
+    public required AdminNote? Remove { get; init; }
 }
