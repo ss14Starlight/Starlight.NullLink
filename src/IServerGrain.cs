@@ -1,6 +1,8 @@
 ﻿using Orleans;
 using Starlight.NullLink.Abstract;
 using Starlight.NullLink.Attributes;
+using System.Collections.Immutable;
+using System.Net;
 
 namespace Starlight.NullLink;
 
@@ -61,6 +63,14 @@ public interface IServerGrain : IGrainWithStringKey
 
     [Public, Alias("RemoveNote")]
     public ValueTask RemoveNote(Guid player, int id, string? project = null, Guid? removedBy = null);
+
+    // ---- Bans ----
+
+    [Public, Alias("RequestBans")]
+    public ValueTask<HashSet<AdminBan>> RequestBans(Guid? player, (IPAddress, int)? Address, (ImmutableArray<byte> hwid, int type)? hwId);
+
+    [Public, Alias("AddOrUpdateBan")]
+    public ValueTask AddOrUpdateBan(AdminBan note, string? project = null, Guid? player = null);
 
     // ---- Events ----
     [Public, Alias("ResubscribeEventBus")]
