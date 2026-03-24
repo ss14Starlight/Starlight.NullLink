@@ -70,7 +70,7 @@ public interface IServerGrain : IGrainWithStringKey
     public ValueTask<List<AdminBan>> RequestBans(Guid? player, (IPAddress, int)? Address, (ImmutableArray<byte> hwid, int type)? hwId);
 
     [Public, Alias("AddOrUpdateBan")]
-    public ValueTask AddOrUpdateBan(AdminBan note, string? project = null, Guid? player = null);
+    public ValueTask AddOrUpdateBan(AdminBan note);
 
     // ---- Events ----
     [Public, Alias("ResubscribeEventBus")]
