@@ -67,7 +67,7 @@ public interface IServerGrain : IGrainWithStringKey
     // ---- Bans ----
 
     [Public, Alias("RequestBans")]
-    public ValueTask<HashSet<AdminBan>> RequestBans(Guid? player, (IPAddress, int)? Address, (ImmutableArray<byte> hwid, int type)? hwId);
+    public ValueTask<List<AdminBan>> RequestBans(Guid? player, (IPAddress, int)? Address, (ImmutableArray<byte> hwid, int type)? hwId);
 
     [Public, Alias("AddOrUpdateBan")]
     public ValueTask AddOrUpdateBan(AdminBan note, string? project = null, Guid? player = null);
