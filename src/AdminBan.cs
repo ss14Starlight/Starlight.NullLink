@@ -59,4 +59,8 @@ public record struct AdminBan
     public string? Role { get; }
     [Id(13)]
     public int? ExemptFlags { get; }
+    [Id(14)]
+    public string? ProjectName { get; set; }
+    [Id(15)]
+    public string? ServerName { get; set; }
 }
