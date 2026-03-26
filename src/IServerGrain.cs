@@ -73,7 +73,7 @@ public interface IServerGrain : IGrainWithStringKey
     public ValueTask<AdminBan?> RequestBan(IPAddress? address, Guid? userId, ImmutableArray<byte>? hwId, ImmutableArray<ImmutableArray<byte>>? modernHWIds);
 
     [Public, Alias("RequestBans")]
-    public ValueTask<List<AdminBan>> RequestBans(Guid? player, (IPAddress, int?)? Address, ImmutableArray<byte>? hwId, ImmutableArray<ImmutableArray<byte>>? modernHWIds, bool includeUnbanned = true);
+    public ValueTask<List<AdminBan>> RequestBans(Guid? player, IPAddress? Address, ImmutableArray<byte>? hwId, ImmutableArray<ImmutableArray<byte>>? modernHWIds, bool includeUnbanned = true);
 
     [Public, Alias("AddOrUpdateBan")]
     public ValueTask AddOrUpdateBan(AdminBan note);
