@@ -7,7 +7,7 @@ namespace Starlight.NullLink;
 [Alias("AdminBan")]
 public record struct AdminBan
 {
-    public AdminBan(int? id, Guid? userId, (IPAddress, int)? address, (ImmutableArray<byte> hwid, int type)? hwId, DateTimeOffset banTime, DateTimeOffset? expirationTime, int? roundId, TimeSpan playtimeAtNote, string reason, string severity, Guid? banningAdmin, AdminUnban? unban, string? role, int? exemptFlags)
+    public AdminBan(int? id, Guid? userId, (IPAddress, int)? address, (ImmutableArray<byte> hwid, int type)? hwId, DateTimeOffset banTime, DateTimeOffset? expirationTime, int? roundId, TimeSpan playtimeAtNote, string reason, string severity, Guid? banningAdmin, AdminUnban? unban, string? role, int? exemptFlags, string? projectName, string? serverName)
     {
         if (userId == null && address == null && hwId == null)
             throw new ArgumentException("Why are you trying to create role ban with zero information about user?");
@@ -29,6 +29,8 @@ public record struct AdminBan
         Unban = unban;
         Role = role;
         ExemptFlags = exemptFlags;
+        ProjectName = projectName;
+        ServerName = serverName;
     }
     [Id(0)]
     public int? Id { get; }
