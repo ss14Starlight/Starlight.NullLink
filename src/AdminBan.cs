@@ -40,7 +40,7 @@ public class AdminBan
     public int? Id { get; }
     [Id(1)]
     [BsonElement("UserId")]
-    [BsonRepresentation(BsonType.Binary, GuidRepresentation = GuidRepresentation.Standard)]
+    [BsonGuidRepresentation(GuidRepresentation.Standard)]
     public Guid? UserId { get; }
     [Id(2)]
     [BsonElement("Address")]
@@ -69,7 +69,7 @@ public class AdminBan
     public string Severity { get; }
     [Id(10)]
     [BsonElement("BanningAdmin")]
-    [BsonRepresentation(BsonType.Binary, GuidRepresentation = GuidRepresentation.Standard)]
+    [BsonGuidRepresentation(GuidRepresentation.Standard)]
     public Guid? BanningAdmin { get; }
     [Id(11)]
     [BsonElement("Unban")]
