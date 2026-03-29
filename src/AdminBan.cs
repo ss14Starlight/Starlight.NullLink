@@ -1,6 +1,5 @@
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System.Collections.Immutable;
-using System.Net;
 
 namespace Starlight.NullLink;
 
@@ -10,7 +9,7 @@ namespace Starlight.NullLink;
 public class AdminBan
 {
     [BsonConstructor]
-    public AdminBan(int? id, Guid? userId, AddressInfo? address, HwIdInfo? hwId, DateTimeOffset banTime, DateTimeOffset? expirationTime, int? roundId, TimeSpan playtimeAtNote, string reason, string severity, Guid? banningAdmin, List<AdminUnban> unban, string? role, int? exemptFlags)
+    public AdminBan(int? id, Guid? userId, AddressInfo? address, HwIdInfo? hwId, DateTimeOffset banTime, DateTimeOffset? expirationTime, int? roundId, TimeSpan playtimeAtNote, string reason, string severity, Guid? banningAdmin, List<AdminUnban> unban, string? role, int? exemptFlags, string? projectName, string? serverName)
     {
         if (userId == null && address == null && hwId == null)
             throw new ArgumentException("Why are you trying to create role ban with zero information about user?");
@@ -18,7 +17,7 @@ public class AdminBan
         if (role == null && exemptFlags == null)
             throw new ArgumentException("Why are you trying to create role ban with zero information about ban?");
 
-        Id = id;
+        Id = id ;
         UserId = userId;
         Address = address;
         HWId = hwId;
@@ -37,6 +36,7 @@ public class AdminBan
     }
     [Id(0)]
     [BsonId]
+    [BsonRepresentation(BsonType.Int32)]
     public int? Id { get; }
     [Id(1)]
     [BsonElement("UserId")]
