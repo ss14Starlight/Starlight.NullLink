@@ -85,13 +85,21 @@ public class AdminBan
     [BsonElement("ServerName")]
     public string? ServerName { get; set; }
 }
+
+[GenerateSerializer]
 public class AddressInfo
 {
+    [Id(0)]
     public string Address { get; set; } = default!;
+    [Id(1)]
     public int CidrMask { get; set; }
 }
+
+[GenerateSerializer]
 public class HwIdInfo
 {
+    [Id(0)]
     public byte[] Hwid { get; set; } = default!;
+    [Id(1)]
     public int Type { get; set; }
 }
