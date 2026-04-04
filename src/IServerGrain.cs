@@ -93,6 +93,10 @@ public interface IServerGrain : IGrainWithStringKey
     public ValueTask UnlockAchievement(Guid player, string achievementId, string characterName);
     [Public, Alias("LockAchievement")]
     public ValueTask LockAchievement(Guid player, string achievementId);
+    [Public, Alias("GetAchievementProgress")]
+    public ValueTask<Dictionary<string, double>> GetAchievementProgress(Guid player);
+    [Public, Alias("SetAchievementProgress")]
+    public ValueTask SetAchievementProgress(Guid player, string key, double value);
 }
 
 [GenerateSerializer]
@@ -105,6 +109,8 @@ public sealed class PlayerData
     public ulong[] DiscordRoles { get; set; } = [];
     [Id(3)]
     public HashSet<Achievement> UnlockedAchievements { get; set; } = [];
+    [Id(4)]
+    public Dictionary<string, double> AchievementProgress { get; set; } = [];
 }
 
 [GenerateSerializer]
