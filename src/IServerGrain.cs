@@ -30,6 +30,9 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("UpdatePlayersPlayTime")]
     public ValueTask UpdatePlayersPlayTime(PlayerPlayTime[] playerPlayTimes);
 
+    [Public, Alias("GetPlayTime")]
+    public ValueTask<PlayTime[]> GetPlayTime(Guid player, string[] trackers, string[] recognition);
+
     // 
 
     [Public, Alias("HasPlayerAnyRole")]
