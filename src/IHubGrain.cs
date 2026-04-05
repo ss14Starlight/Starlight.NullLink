@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Orleans;
@@ -85,6 +86,13 @@ public record ServerInfo
     public int? Players { get; set; }
     [Id(3)]
     public ServerStatus Status { get; set; } = ServerStatus.Offline;
+    [Id(4)]
+    public string? MapName { get; set; }
+    [Id(5)]
+    public string? GamemodeName { get; set; }
+    [Id(6)]
+    public bool? PanicBunkerActive { get; set; }
+
 }
 [GenerateSerializer]
 public enum ServerStatus : byte

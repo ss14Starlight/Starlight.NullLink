@@ -1,0 +1,17 @@
+using Starlight.NullLink;
+
+namespace Starlight.NullLink.Event;
+
+[GenerateSerializer]
+[Alias("Starlight.NullLink.Event.NotesChangedEvent")]
+public sealed record NotesChangedEvent : BaseEvent, IPlayerEvent
+{
+    [Id(0)]
+    public required Guid Player { get; init; }
+    [Id(1)]
+    public required AdminNote? Add { get; init; }
+    [Id(2)]
+    public required AdminNote? Update { get; init; }
+    [Id(3)]
+    public required AdminNote? Remove { get; init; }
+}
