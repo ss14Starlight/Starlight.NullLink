@@ -87,15 +87,12 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("UnsubscribeEventBus")]
     public ValueTask UnsubscribeEventBus(IEventBusObserver observer);
 
-    // ---- Entity Transfer ----
+    // ---- Inter-server Messages ----
     /// <summary>
-    /// Send an entity transfer saga message to another server.
-    /// NullLink relays this and returns the destination server response.
-    /// All entity freezing, snapshotting, prototype checks, spawning, ect
-    /// need to be handled at content.
+    /// Sends an event to another server.
     /// </summary>
-    [Public, Alias("SendEntityTransferMessage")]
-    public ValueTask<EntityTransferRelayResult> SendEntityTransferMessage(string destinationServer, EntityTransferMessage message);
+    [Public, Alias("SendMessageToServer")]
+    public ValueTask<InterServerMessageResult> SendMessageToServer(string destinationServer, InterServerEvent message);
 
     // ---- Achievments ----
     [Public, Alias("GetAllUnlockedAchievements")]

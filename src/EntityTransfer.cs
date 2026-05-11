@@ -1,32 +1,60 @@
 namespace Starlight.NullLink;
 
-/// <summary>
-/// What step of the transfer saga this message is for.
-/// NullLink should not care about the entity data itself, it only relays the message.
-/// </summary>
+// Server A asks Server B to check and prepare the entities.
 [GenerateSerializer]
-[Alias("Starlight.NullLink.EntityTransferMessageKind")]
-public enum EntityTransferMessageKind : byte
+[Alias("Starlight.NullLink.EntityTransferPrepareEvent")]
+public sealed class EntityTransferPrepareEvent : InterServerEvent
 {
-    /// <summary>
-    /// Source server is asking the destination server if it can prepare the entities.
-    /// </summary>
-    Prepare = 0,
-
-    /// <summary>
-    /// Source server has accepted the destination prepare step.
-    /// </summary>
-    Commit = 1,
-
-    /// <summary>
-    /// Source server is cancelling the transfer.
-    /// </summary>
-    Abort = 2,
+    [Id(0)]
+    public required EntityTransferPrepareRequest Request { get; set; }
 }
 
-/// <summary>
-/// Error codes.
-/// </summary>
+// Server B sends this back after processing Prepare.
+[GenerateSerializer]
+[Alias("Starlight.NullLink.EntityTransferPrepareResultEvent")]
+public sealed class EntityTransferPrepareResultEvent : InterServerEvent
+{
+    [Id(0)]
+    public required EntityTransferPrepareResult Result { get; set; }
+}
+
+// Server A tells Server B to finish the prepared transfer.
+[GenerateSerializer]
+[Alias("Starlight.NullLink.EntityTransferCommitEvent")]
+public sealed class EntityTransferCommitEvent : InterServerEvent
+{
+    [Id(0)]
+    public required EntityTransferCommitRequest Request { get; set; }
+}
+
+// Server B sends this back after Commit.
+[GenerateSerializer]
+[Alias("Starlight.NullLink.EntityTransferCommitResultEvent")]
+public sealed class EntityTransferCommitResultEvent : InterServerEvent
+{
+    [Id(0)]
+    public required EntityTransferCommitResult Result { get; set; }
+}
+
+// Server A tells Server B to clean up/cancel.
+[GenerateSerializer]
+[Alias("Starlight.NullLink.EntityTransferAbortEvent")]
+public sealed class EntityTransferAbortEvent : InterServerEvent
+{
+    [Id(0)]
+    public required EntityTransferAbortRequest Request { get; set; }
+}
+
+// Server B sends this back after Abort.
+[GenerateSerializer]
+[Alias("Starlight.NullLink.EntityTransferAbortResultEvent")]
+public sealed class EntityTransferAbortResultEvent : InterServerEvent
+{
+    [Id(0)]
+    public required EntityTransferAbortResult Result { get; set; }
+}
+
+// Content-side transfer errors.
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferFailureCode")]
 public enum EntityTransferFailureCode : byte
@@ -56,110 +84,11 @@ public enum EntityTransferFailureCode : byte
     InternalError = 255,
 }
 
-/// <summary>
-/// Message sent from one server to another for an entity transfer saga.
-/// </summary>
+// Result of the prepare step.
 [GenerateSerializer]
-[Alias("Starlight.NullLink.EntityTransferMessage")]
-public sealed class EntityTransferMessage
+[Alias("Starlight.NullLink.EntityTransferPrepareResult")]
+public sealed class EntityTransferPrepareResult
 {
-    /// <summary>
-    /// Unique id for this transfer attempt.
-    /// Both servers use this to track/rollback the same saga.
-    /// </summary>
-    [Id(0)]
-    public Guid SagaId { get; set; }
-
-    /// <summary>
-    /// Which saga step this message is for.
-    /// </summary>
-    [Id(1)]
-    public EntityTransferMessageKind Kind { get; set; }
-
-    /// <summary>
-    /// Server that started the transfer.
-    /// </summary>
-    [Id(2)]
-    public required string SourceServer { get; set; }
-
-    /// <summary>
-    /// Server that should receive the transfer.
-    /// </summary>
-    [Id(3)]
-    public required string DestinationServer { get; set; }
-
-    /// <summary>
-    /// When the source created this message.
-    /// </summary>
-    [Id(4)]
-    public DateTime CreatedAt { get; set; }
-
-    /// <summary>
-    /// When this saga should be considered dead.
-    /// Content should rollback if this expires.
-    /// </summary>
-    [Id(5)]
-    public DateTime ExpiresAt { get; set; }
-
-    /// <summary>
-    /// Data for the prepare step.
-    /// </summary>
-    [Id(6)]
-    public EntityTransferPrepareRequest? Prepare { get; set; }
-
-    /// <summary>
-    /// Data for the commit step.
-    /// </summary>
-    [Id(7)]
-    public EntityTransferCommitRequest? Commit { get; set; }
-
-    /// <summary>
-    /// Data for the abort step.
-    /// </summary>
-    [Id(8)]
-    public EntityTransferAbortRequest? Abort { get; set; }
-}
-
-/// <summary>
-/// Result returned by NullLink after it relays the message.
-///
-/// Success means the message reached the destination server and it answered.
-/// It does not always mean the transfer itself was accepted,
-/// Check Response.Accepted for that.
-/// </summary>
-[GenerateSerializer]
-[Alias("Starlight.NullLink.EntityTransferRelayResult")]
-public sealed class EntityTransferRelayResult
-{
-    [Id(0)]
-    public bool Success { get; set; }
-
-    [Id(1)]
-    public EntityTransferFailureCode FailureCode { get; set; }
-
-    [Id(2)]
-    public string? Message { get; set; }
-
-    /// <summary>
-    /// Response from the destination server.
-    /// </summary>
-    [Id(3)]
-    public EntityTransferResponse? Response { get; set; }
-}
-
-/// <summary>
-/// Response from the destination server for any saga step.
-/// </summary>
-[GenerateSerializer]
-[Alias("Starlight.NullLink.EntityTransferResponse")]
-public sealed class EntityTransferResponse
-{
-    /// <summary>
-    /// True if the destination accepted this saga step.
-    /// For Prepare, this means entities were prepared in destination.
-    /// For Commit, this means entities were handed over.
-    /// For Abort, this means prepared entities were cleaned up.
-    /// </summary>
     [Id(0)]
     public bool Accepted { get; set; }
 
@@ -169,19 +98,43 @@ public sealed class EntityTransferResponse
     [Id(2)]
     public string? Message { get; set; }
 
-    /// <summary>
-    /// Per-entity results for Prepare.
-    /// Sp the source can know exactly what failed.
-    /// </summary>
+    // Per-entity info so the source can tell what failed.
     [Id(3)]
     public EntityTransferEntityResult[] EntityResults { get; set; } = [];
 
-    /// <summary>
-    /// Destination-owned arrival point that was actually accepted.
-    /// This can be different from the requested point if the destination used a fallback.
-    /// </summary>
+    // The arrival point the destination actually chose.
     [Id(4)]
     public string? ResolvedArrivalPoint { get; set; }
+}
+
+// Result of the commit step.
+[GenerateSerializer]
+[Alias("Starlight.NullLink.EntityTransferCommitResult")]
+public sealed class EntityTransferCommitResult
+{
+    [Id(0)]
+    public bool Accepted { get; set; }
+
+    [Id(1)]
+    public EntityTransferFailureCode FailureCode { get; set; }
+
+    [Id(2)]
+    public string? Message { get; set; }
+}
+
+// Result of the abort step.
+[GenerateSerializer]
+[Alias("Starlight.NullLink.EntityTransferAbortResult")]
+public sealed class EntityTransferAbortResult
+{
+    [Id(0)]
+    public bool Accepted { get; set; }
+
+    [Id(1)]
+    public EntityTransferFailureCode FailureCode { get; set; }
+
+    [Id(2)]
+    public string? Message { get; set; }
 }
 
 /// <summary>
