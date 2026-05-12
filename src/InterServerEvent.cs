@@ -4,7 +4,7 @@ namespace Starlight.NullLink;
 
 [GenerateSerializer]
 [Alias("Starlight.NullLink.InterServerEvent")]
-public abstract class InterServerEvent : BaseEvent
+public abstract record InterServerEvent : BaseEvent
 {
     [Id(0)]
     public Guid EventId { get; set; } = Guid.NewGuid();
@@ -31,7 +31,7 @@ public abstract class InterServerEvent : BaseEvent
 // It doesn't mean the other server processed it.
 [GenerateSerializer]
 [Alias("Starlight.NullLink.InterServerMessageResult")]
-public sealed class InterServerMessageResult
+public sealed record InterServerMessageResult
 {
     [Id(0)]
     public bool Accepted { get; set; }
