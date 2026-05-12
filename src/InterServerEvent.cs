@@ -2,7 +2,7 @@ namespace Starlight.NullLink;
 
 [GenerateSerializer]
 [Alias("Starlight.NullLink.InterServerEvent")]
-public abstract class InterServerEvent
+public abstract class InterServerEvent : BaseEvent
 {
     [Id(0)]
     public Guid EventId { get; set; } = Guid.NewGuid();
