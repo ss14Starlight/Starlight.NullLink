@@ -3,7 +3,7 @@ namespace Starlight.NullLink;
 // Server A asks Server B to check and prepare the entities.
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferPrepareEvent")]
-public sealed class EntityTransferPrepareEvent : InterServerEvent
+public sealed record EntityTransferPrepareEvent : InterServerEvent
 {
     [Id(0)]
     public required EntityTransferPrepareRequest Request { get; set; }
@@ -12,7 +12,7 @@ public sealed class EntityTransferPrepareEvent : InterServerEvent
 // Server B sends this back after processing Prepare.
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferPrepareResultEvent")]
-public sealed class EntityTransferPrepareResultEvent : InterServerEvent
+public sealed record EntityTransferPrepareResultEvent : InterServerEvent
 {
     [Id(0)]
     public required EntityTransferPrepareResult Result { get; set; }
@@ -21,7 +21,7 @@ public sealed class EntityTransferPrepareResultEvent : InterServerEvent
 // Server A tells Server B to finish the prepared transfer.
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferCommitEvent")]
-public sealed class EntityTransferCommitEvent : InterServerEvent
+public sealed record EntityTransferCommitEvent : InterServerEvent
 {
     [Id(0)]
     public required EntityTransferCommitRequest Request { get; set; }
@@ -30,7 +30,7 @@ public sealed class EntityTransferCommitEvent : InterServerEvent
 // Server B sends this back after Commit.
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferCommitResultEvent")]
-public sealed class EntityTransferCommitResultEvent : InterServerEvent
+public sealed record EntityTransferCommitResultEvent : InterServerEvent
 {
     [Id(0)]
     public required EntityTransferCommitResult Result { get; set; }
@@ -39,7 +39,7 @@ public sealed class EntityTransferCommitResultEvent : InterServerEvent
 // Server A tells Server B to clean up/cancel.
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferAbortEvent")]
-public sealed class EntityTransferAbortEvent : InterServerEvent
+public sealed record EntityTransferAbortEvent : InterServerEvent
 {
     [Id(0)]
     public required EntityTransferAbortRequest Request { get; set; }
@@ -48,7 +48,7 @@ public sealed class EntityTransferAbortEvent : InterServerEvent
 // Server B sends this back after Abort.
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferAbortResultEvent")]
-public sealed class EntityTransferAbortResultEvent : InterServerEvent
+public sealed record EntityTransferAbortResultEvent : InterServerEvent
 {
     [Id(0)]
     public required EntityTransferAbortResult Result { get; set; }
@@ -87,7 +87,7 @@ public enum EntityTransferFailureCode : byte
 // Result of the prepare step.
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferPrepareResult")]
-public sealed class EntityTransferPrepareResult
+public sealed record EntityTransferPrepareResult
 {
     [Id(0)]
     public bool Accepted { get; set; }
@@ -110,7 +110,7 @@ public sealed class EntityTransferPrepareResult
 // Result of the commit step.
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferCommitResult")]
-public sealed class EntityTransferCommitResult
+public sealed record EntityTransferCommitResult
 {
     [Id(0)]
     public bool Accepted { get; set; }
@@ -125,7 +125,7 @@ public sealed class EntityTransferCommitResult
 // Result of the abort step.
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferAbortResult")]
-public sealed class EntityTransferAbortResult
+public sealed record EntityTransferAbortResult
 {
     [Id(0)]
     public bool Accepted { get; set; }
@@ -143,7 +143,7 @@ public sealed class EntityTransferAbortResult
 /// </summary>
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferPrepareRequest")]
-public sealed class EntityTransferPrepareRequest
+public sealed record EntityTransferPrepareRequest
 {
     /// <summary>
     /// Name of the content-side transfer protocol.
@@ -196,7 +196,7 @@ public sealed class EntityTransferPrepareRequest
 /// </summary>
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferCommitRequest")]
-public sealed class EntityTransferCommitRequest
+public sealed record EntityTransferCommitRequest
 {
     /// <summary>
     /// Destination arrival point id to use when finalizing the transfer.
@@ -218,7 +218,7 @@ public sealed class EntityTransferCommitRequest
 /// </summary>
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferAbortRequest")]
-public sealed class EntityTransferAbortRequest
+public sealed record EntityTransferAbortRequest
 {
     [Id(0)]
     public string? Reason { get; set; }
@@ -232,7 +232,7 @@ public sealed class EntityTransferAbortRequest
 /// </summary>
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferEntity")]
-public sealed class EntityTransferEntity
+public sealed record EntityTransferEntity
 {
     /// <summary>
     /// Temp id used only inside this saga.
@@ -302,7 +302,7 @@ public sealed class EntityTransferEntity
 /// </summary>
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferComponentDelta")]
-public sealed class EntityTransferComponentDelta
+public sealed record EntityTransferComponentDelta
 {
     /// <summary>
     /// Component name/type id as content understands it.
@@ -329,7 +329,7 @@ public sealed class EntityTransferComponentDelta
 /// </summary>
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferRemovedComponent")]
-public sealed class EntityTransferRemovedComponent
+public sealed record EntityTransferRemovedComponent
 {
     [Id(0)]
     public required string ComponentName { get; set; }
@@ -340,7 +340,7 @@ public sealed class EntityTransferRemovedComponent
 /// </summary>
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferPlayerBinding")]
-public sealed class EntityTransferPlayerBinding
+public sealed record EntityTransferPlayerBinding
 {
     [Id(0)]
     public Guid Player { get; set; }
@@ -354,7 +354,7 @@ public sealed class EntityTransferPlayerBinding
 /// </summary>
 [GenerateSerializer]
 [Alias("Starlight.NullLink.EntityTransferEntityResult")]
-public sealed class EntityTransferEntityResult
+public sealed record EntityTransferEntityResult
 {
     [Id(0)]
     public Guid TransferEntityId { get; set; }
