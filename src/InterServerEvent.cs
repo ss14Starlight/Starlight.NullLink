@@ -1,3 +1,5 @@
+using Starlight.NullLink.Event;
+
 namespace Starlight.NullLink;
 
 [GenerateSerializer]
