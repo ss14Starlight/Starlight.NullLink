@@ -1,6 +1,4 @@
-using Starlight.NullLink.Event;
-
-namespace Starlight.NullLink;
+namespace Starlight.NullLink.Event;
 
 [GenerateSerializer]
 [Alias("Starlight.NullLink.InterServerEvent")]
