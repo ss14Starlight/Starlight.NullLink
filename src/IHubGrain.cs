@@ -95,6 +95,8 @@ public record ServerInfo
     [Id(7)]
     public int? Admins { get; set; }
     [Id(8)]
+    public int? ActiveAdmins { get; set; }
+    [Id(9)]
     public int? Mentors { get; set; }
 
 }
