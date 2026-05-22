@@ -92,6 +92,10 @@ public record ServerInfo
     public string? GamemodeName { get; set; }
     [Id(6)]
     public bool? PanicBunkerActive { get; set; }
+    [Id(7)]
+    public int? Admins { get; set; }
+    [Id(8)]
+    public int? Mentors { get; set; }
 
 }
 [GenerateSerializer]
