@@ -73,6 +73,10 @@ public record Server
     public bool IsAdultOnly { get; set; } = false;
     [Id(4)]
     public required string ConnectionString { get; set; }
+    [Id(5)]
+    public int? PanicBunkerMinAccountAge { get; set; }
+    [Id(6)]
+    public int? PanicBunkerMinOverallMinutes { get; set; }
 }
 [GenerateSerializer]
 [Alias("Starlight.NullLink.ServerInfo")]
