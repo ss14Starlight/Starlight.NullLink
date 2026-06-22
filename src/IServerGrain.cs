@@ -35,6 +35,9 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("GetPlayTime")]
     public ValueTask<PlayTime[]> GetPlayTime(Guid player, string[] trackers, string[] recognition);
 
+    [Public, Alias("GetAllPlayTime")]
+    public ValueTask<PlayTime[]> GetAllPlayTime(Guid player, string[] recognition);
+
     // 
 
     [Public, Alias("HasPlayerAnyRole")]
