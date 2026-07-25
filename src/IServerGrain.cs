@@ -12,14 +12,17 @@ namespace Starlight.NullLink;
 [Alias("Starlight.NullLink.IServerGrain")]
 public interface IServerGrain : IGrainWithStringKey
 {
-    // ---- Hub ----
+    #region Hub
+
     [Public, Alias("UpdateServer")]
     public ValueTask UpdateServer(Server server);
 
     [Public, Alias("UpdateServerInfo")]
     public ValueTask UpdateServerInfo(ServerInfo info);
 
-    // ---- Player ----
+    #endregion
+
+    #region Player
 
     [Public, Alias("PlayerConnected")]
     public ValueTask PlayerConnected(Guid player);
@@ -27,7 +30,9 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("PlayerDisconnected")]
     public ValueTask PlayerDisconnected(Guid player);
 
-    // ---- Playtime ----
+    #endregion
+
+    #region PlayTime
 
     [Public, Alias("UpdatePlayersPlayTime")]
     public ValueTask UpdatePlayersPlayTime(PlayerPlayTime[] playerPlayTimes);
@@ -35,7 +40,9 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("GetPlayTime")]
     public ValueTask<PlayTime[]> GetPlayTime(Guid player, string[] trackers, string[] recognition);
 
-    // 
+    #endregion
+
+    #region Discord
 
     [Public, Alias("HasPlayerAnyRole")]
     public ValueTask<bool> HasPlayerAnyRole(Guid player, ulong[] roles);
@@ -43,12 +50,16 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("GetPlayerDiscordId")]
     public ValueTask<ulong> GetPlayerDiscordId(Guid player);
 
-    // ---- Bug Reports ----
+    #endregion
+
+    #region Bug Reports
 
     [Public, Alias("BugReport")]
     public ValueTask BugReport(string player, string title, string description, Dictionary<string, string> metadata);
 
-    // ---- Resources ----
+    #endregion
+
+    #region Resources
 
     /// <summary>
     /// Changes Resource with ID by adding Value. So you can increase or decrease resource value.
@@ -56,7 +67,9 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("UpdateResource")]
     public ValueTask UpdateResource(Guid player, string key, double value);
 
-    // ---- Notes ----
+    #endregion
+
+    #region Notes
 
     [Public, Alias("RequestNotes")]
     public ValueTask<HashSet<AdminNote>> RequestNotes(Guid player);
@@ -67,7 +80,9 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("RemoveNote")]
     public ValueTask RemoveNote(Guid player, int id, string? project = null, Guid? removedBy = null);
 
-    // ---- Bans ----
+    #endregion
+
+    #region Bans
 
     [Public, Alias("RequestBanById")]
     public ValueTask<AdminBan?> RequestBanById(int id, string? project = null, string? server = null);
@@ -81,20 +96,32 @@ public interface IServerGrain : IGrainWithStringKey
     [Public, Alias("AddOrUpdateBan")]
     public ValueTask AddOrUpdateBan(AdminBan note);
 
-    // ---- Events ----
+    [Public, Alias("AddUnban")]
+    public ValueTask AddUnban(int banId, AdminUnban unban, string? project, string? server);
+
+    #endregion
+
+    #region Events
+
     [Public, Alias("ResubscribeEventBus")]
     public ValueTask ResubscribeEventBus(IEventBusObserver observer);
     [Public, Alias("UnsubscribeEventBus")]
     public ValueTask UnsubscribeEventBus(IEventBusObserver observer);
 
-    // ---- Inter-server Messages ----
+    #endregion
+
+    #region Inter-server Messages
+
     /// <summary>
     /// Sends an event to another server.
     /// </summary>
     [Public, Alias("SendMessageToServer")]
     public ValueTask<InterServerMessageResult> SendMessageToServer(string destinationServer, InterServerEvent message);
 
-    // ---- Achievments ----
+    #endregion
+
+    #region Achievements
+
     [Public, Alias("GetAllUnlockedAchievements")]
     public ValueTask<HashSet<Achievement>> GetUnlockedAchievements(Guid player);
     [Public, Alias("HasAchievementUnlocked")]
@@ -107,6 +134,8 @@ public interface IServerGrain : IGrainWithStringKey
     public ValueTask<Dictionary<string, double>> GetAchievementProgress(Guid player);
     [Public, Alias("SetAchievementProgress")]
     public ValueTask SetAchievementProgress(Guid player, string key, double value);
+
+    #endregion
 }
 
 [GenerateSerializer]
